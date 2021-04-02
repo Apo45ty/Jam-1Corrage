@@ -35,16 +35,27 @@ public class PlayerController : MonoBehaviour
         if(stats!=null){
             if(mover!=null)  {
                 if(Input.GetKey(this.UPKEYCODE)){
-                mover.move(new Vector3(0,stats.moveUPDist*Time.deltaTime,0));
-                }
+                    if(Input.GetKeyDown(this.UPKEYCODE))
+                        mover.stopVertical();
+                    mover.move(new Vector3(0,stats.moveUPDist*Time.deltaTime,0));
+                }  else 
                 if(Input.GetKey(this.DOWNKEYCODE)){
+                    if(Input.GetKeyDown(this.DOWNKEYCODE))
+                        mover.stopVertical();
                     mover.move(new Vector3(0,-stats.moveDownDist*Time.deltaTime,0));
-                }
+                } else 
                 if(Input.GetKey(this.LEFTKEYCODE)){
+                    if(Input.GetKeyDown(this.LEFTKEYCODE))
+                        mover.stopHorizontal();
                     mover.move(new Vector3(-stats.moveLeftDist*Time.deltaTime,0,0));
-                }
+                } else 
                 if(Input.GetKey(this.RIGHTKEYCODE)){
+                    if(Input.GetKeyDown(this.RIGHTKEYCODE))
+                        mover.stopHorizontal();
                     mover.move(new Vector3(stats.moveRightDist*Time.deltaTime,0,0));
+                } else 
+                {
+                    mover.stop();
                 }
             } 
             if(figther!=null){

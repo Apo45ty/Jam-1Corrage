@@ -29,7 +29,7 @@ public class RandomColor : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(this.STOPKEY))
-            isRunning = true;
+            isRunning = !isRunning;
         if(!isRunning||possibleColors==null||possibleColors.Length==0)
             return;
         millisecondsSinceChange += Time.deltaTime;

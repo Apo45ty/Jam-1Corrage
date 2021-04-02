@@ -26,5 +26,26 @@ public class Mover : MonoBehaviour
             return;
             rb.AddForce(vector3);
         }
+
+        internal void stop()
+        {
+            if(rb==null)
+            return;
+            rb.velocity = Vector3.zero;
+        }
+
+        internal void stopVertical()
+        {
+             if(rb==null)
+            return;
+            rb.velocity = new Vector2(rb.velocity.x,0);
+        }
+
+        internal void stopHorizontal()
+        {
+             if(rb==null)
+            return;
+            rb.velocity = new Vector2(0,rb.velocity.y);
+        }
     }
 }
