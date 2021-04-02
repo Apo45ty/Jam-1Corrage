@@ -8,7 +8,7 @@ public class RandomColor : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    Color[] possibleColors;
+    Sprite[] possibleColors;
     [SerializeField]
     float milesecondsPerColor=500; 
     private bool isRunning = true;
@@ -22,7 +22,7 @@ public class RandomColor : MonoBehaviour
         if(!isRunning||possibleColors==null||possibleColors.Length==0)
             return;
         this.currentColorTime=Random.Range(0,possibleColors.Length);
-        this.GetComponent<Image>().color = possibleColors[currentColorTime];
+        this.GetComponent<Image>().sprite = possibleColors[currentColorTime];
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class RandomColor : MonoBehaviour
         if(millisecondsSinceChange>milesecondsPerColor){
             millisecondsSinceChange=0;
             currentColorTime=(currentColorTime+1)%possibleColors.Length;
-            this.GetComponent<Image>().color = possibleColors[currentColorTime];
+            this.GetComponent<Image>().sprite = possibleColors[currentColorTime];
         }
     }
 }
