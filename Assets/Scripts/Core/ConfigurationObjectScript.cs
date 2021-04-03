@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,11 @@ namespace ApolionGames.JamOne.Core{
         private PlayerScript playerScript;
 
         public string Language ="English";
+
         public string LevelName="Level01";
         public string CutSceneName="Cutscene01";
+        public  string diagName="dialog";
+        private string latestYesNo;
 
         void Awake()
         {
@@ -25,6 +29,13 @@ namespace ApolionGames.JamOne.Core{
             }
             me = this;
             DontDestroyOnLoad(this.gameObject);
+        }
+        public string getLatestYesNo(){
+            return latestYesNo;
+        }
+        internal void setLatestYesNo(string v)
+        {
+            this.latestYesNo = v;
         }
         void OnEnable()
         {

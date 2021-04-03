@@ -14,13 +14,15 @@ namespace ApolionGames.JamOne.CutScenes{
         private Text MyTextBox;
         private string[] lines;
         private int currentline = 0;
+        private static int diagCount = 1;
 
         public void initializeFileTextBox(){
-            currentline = 0;
+            GetComponent<PlayableDirector>().playableGraph.GetRootPlayable(0).SetSpeed(0);
             GetComponent<PlayableDirector>().Pause();
+            currentline = 0;
             ConfigurationObjectScript conf = ConfigurationObjectScript.getInstance();
-            Debug.Log(Application.dataPath + "/Resources/" +conf.Language+"/"+conf.LevelName+"/"+conf.CutSceneName+"/"+ "dialog.diag" );
-            var sr = new StreamReader(Application.dataPath + "/Resources/" +conf.Language+"/"+conf.LevelName+"/"+conf.CutSceneName+"/"+ "dialog.diag");
+                            Debug.Log(Application.dataPath + "/Resources/" +conf.Language+"/"+conf.LevelName+"/"+conf.CutSceneName+"/"+conf.diagName+diagCount.ToString("00"));
+            var sr = new StreamReader(Application.dataPath + "/Resources/" +conf.Language+"/"+conf.LevelName+"/"+conf.CutSceneName+"/"+conf.diagName+diagCount.ToString("00"));
             var fileContents = sr.ReadToEnd();
             sr.Close();
  
@@ -32,8 +34,11 @@ namespace ApolionGames.JamOne.CutScenes{
                 if(currentline<lines.Length){
                     Debug.Log(lines[currentline]);
                     MyTextBox.text = lines[currentline++];
-                } else 
+                } else {
+                    diagCount++;
+                    GetComponent<PlayableDirector>().playableGraph.GetRootPlayable(0).SetSpeed(1);
                     GetComponent<PlayableDirector>().Resume();
+                }
             }
         }
     }
