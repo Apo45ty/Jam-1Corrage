@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using ApolionGames.JamOne.Controls;
+using ApolionGames.JamOne.Core;
 using UnityEngine;
 using UnityEngine.UI;
-namespace ApolionGames.JamOne.Combat{
 
-public class RandomColor : MonoBehaviour
+namespace ApolionGames.JamOne.Core{
+
+public class RandomSprite : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    Sprite[] possibleColors;
+    public SlotMachineItem[] possibleColors;
     [SerializeField]
-    float milesecondsPerColor=500; 
+    private    float milesecondsPerColor=500; 
+
     private bool isRunning = true;
     private float millisecondsSinceChange = 0;
-    [SerializeField]    
-    private KeyCode STOPKEY;
     private int currentColorTime=0;
         void Start()
     {
@@ -22,13 +24,13 @@ public class RandomColor : MonoBehaviour
         if(!isRunning||possibleColors==null||possibleColors.Length==0)
             return;
         this.currentColorTime=Random.Range(0,possibleColors.Length);
-        this.GetComponent<Image>().sprite = possibleColors[currentColorTime];
+        this.GetComponent<Image>().sprite = possibleColors[currentColorTime].image;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(this.STOPKEY))
+        if(Input.GetKeyDown(PlayerController.pSWINGKEYCODE))
             isRunning = !isRunning;
         if(!isRunning||possibleColors==null||possibleColors.Length==0)
             return;
@@ -36,8 +38,15 @@ public class RandomColor : MonoBehaviour
         if(millisecondsSinceChange>milesecondsPerColor){
             millisecondsSinceChange=0;
             currentColorTime=(currentColorTime+1)%possibleColors.Length;
-            this.GetComponent<Image>().sprite = possibleColors[currentColorTime];
+            this.GetComponent<Image>().sprite = possibleColors[currentColorTime].image;
         }
+    }
+
+    public SlotMachineItem getCurrentSlotMachineItem(){
+        return  possibleColors[currentColorTime];
+    }
+    public bool getIsRunning(){
+        return isRunning;
     }
 }
 }

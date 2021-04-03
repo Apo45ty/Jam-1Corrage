@@ -5,16 +5,9 @@ namespace ApolionGames.JamOne.Combat{
 
 public class Health : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    public float currentHealth = 100;
+    [SerializeField]
+    public float maxHealth = 100;
 }
 }

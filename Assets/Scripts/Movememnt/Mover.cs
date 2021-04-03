@@ -6,12 +6,12 @@ namespace ApolionGames.JamOne.Movement{
 
 public class Mover : MonoBehaviour
 {
-        private Rigidbody2D rb;
+        // private Rigidbody2D rb;
 
         // Start is called before the first frame update
         void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        // rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -22,30 +22,31 @@ public class Mover : MonoBehaviour
 
         public void move(Vector3 vector3)
         {
-            if(rb==null)
-            return;
-            rb.AddForce(vector3);
+            transform.position += vector3;
+            // if(rb==null)
+            // return;
+            // rb.AddForce(vector3);
         }
 
         internal void stop()
         {
-            if(rb==null)
-            return;
-            rb.velocity = Vector3.zero;
+            // if(rb==null)
+            // return;
+            // rb.velocity = Vector3.zero;
         }
 
         internal void stopVertical()
         {
-             if(rb==null)
-            return;
-            rb.velocity = new Vector2(rb.velocity.x,0);
+            //  if(rb==null)
+            // return;
+            // rb.velocity = new Vector2(rb.velocity.x,0);
         }
 
         internal void stopHorizontal()
         {
-             if(rb==null)
-            return;
-            rb.velocity = new Vector2(0,rb.velocity.y);
+            //  if(rb==null)
+            // return;
+            // rb.velocity = new Vector2(0,rb.velocity.y);
         }
     }
 }
