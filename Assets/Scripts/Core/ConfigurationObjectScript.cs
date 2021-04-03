@@ -11,6 +11,10 @@ namespace ApolionGames.JamOne.Core{
         [SerializeField]
         private PlayerScript playerScript;
 
+        public string Language ="English";
+        public string LevelName="Level01";
+        public string CutSceneName="Cutscene01";
+
         void Awake()
         {
 
