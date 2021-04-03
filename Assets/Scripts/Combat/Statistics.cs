@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,12 @@ public class Statistics : MonoBehaviour
         public float moveLeftDist=5;
         public float moveRightDist=5;
         public float timeBetweenAttacks=3;
+        //Points needed to trigger an attack by gambelers sword
+        public float PointsToAttack =  500;
 
-}
+        internal float computePointsToAttack()
+        {
+            return PointsToAttack;
+        }
+    }
 }

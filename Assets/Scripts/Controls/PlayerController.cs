@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
         private Mover mover;
         private Statistics stats;
         public static KeyCode pSWINGKEYCODE,pSPECIALSWINGKEYCODE,pSPECIALSWINGKEYCODETWO;
+
         [SerializeField]
         private KeyCode UPKEYCODE;
 
@@ -36,6 +37,19 @@ public class PlayerController : MonoBehaviour
         pSPECIALSWINGKEYCODE=SPECIALSWINGKEYCODE;
         pSPECIALSWINGKEYCODETWO=SPECIALSWINGKEYCODETWO;
     }
+        public List<CombatTarget> CaptureEnemies(float range)
+        {
+            List<CombatTarget> targets= new List<CombatTarget>();
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, Vector2.one*range,0);
+            foreach(Collider2D col in colliders){
+                CombatTarget combatTarget = col.gameObject.GetComponent<CombatTarget>();
+                if (combatTarget!=null)
+                {
+                    targets.Add(combatTarget);
+                }
+            }
+            return targets;
+        }
 
     // Update is called once per frame
     void Update()
@@ -62,10 +76,11 @@ public class PlayerController : MonoBehaviour
                 if(Input.GetKey(this.SPECIALSWINGKEYCODETWO)){
                     figther.swingSpecialTwo(stats);
                 }if(Input.GetKey(this.SWINGKEYCODE)){
-                    figther.swing(stats);
+                    figther.swing(CaptureEnemies(figther.GetCurrentWeapon().GetWeaponRange()),this.GetComponent<CombatTarget>());
                 }
             }
         }
+        
     }
 }
 

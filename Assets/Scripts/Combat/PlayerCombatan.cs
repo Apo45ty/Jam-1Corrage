@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace ApolionGames.JamOne.Combat{
-
-[RequireComponent(typeof(Health),typeof(Statistics))]
-    public class CombatTarget : MonoBehaviour
+    public class PlayerCombatan : CombatTarget
     {
-        public virtual void AfterAttackCallback(){
+        public override void AfterAttackCallback()
+        {
             
         }
     }

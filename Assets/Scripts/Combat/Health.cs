@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,5 +10,10 @@ public class Health : MonoBehaviour
     public float currentHealth = 100;
     [SerializeField]
     public float maxHealth = 100;
-}
+
+        internal void doDamage(float v)
+        {
+            this.currentHealth=Mathf.Max(0,this.currentHealth-v);
+        }
+    }
 }

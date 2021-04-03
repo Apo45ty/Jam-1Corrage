@@ -7,7 +7,7 @@ using UnityEngine;
 public class Fighter : MonoBehaviour
 {
         [SerializeField]
-        private List<Weapon> inventoryWeapons;
+        private List<Weapon> inventoryWeapons=new List<Weapon>();
         private Statistics stats;
         private int currentWeaponIndex = 0;
         private Weapon currentlyEquippedWeapon;
@@ -18,6 +18,7 @@ public class Fighter : MonoBehaviour
         {
             stats = GetComponent<Statistics>();
             UpdateWeaponInventory();
+            currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
         }
         void Update(){
             currTimeSinceLastAttack=Mathf.Max(0,currTimeSinceLastAttack-Time.deltaTime);
@@ -25,6 +26,7 @@ public class Fighter : MonoBehaviour
         }
         public void UpdateWeaponInventory()
         {
+            inventoryWeapons=new List<Weapon>();
             foreach(Weapon w in GetComponentsInChildren<Weapon>()){
                 if(w==null)
                     continue;
@@ -32,14 +34,13 @@ public class Fighter : MonoBehaviour
             }
         }
 
-        public bool swing(Statistics stats)
+        public bool swing(List<CombatTarget> targets,CombatTarget WeaponUser)
         {
             if(currTimeSinceLastAttack>0)
                 return false;
             currTimeSinceLastAttack = stats.timeBetweenAttacks;
             currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
-            currentlyEquippedWeapon.CaptureEnemies();
-            currentlyEquippedWeapon.ApplyAttack(transform,stats);
+            currentlyEquippedWeapon.ApplyAttack(transform,targets,WeaponUser);
             return true;
         }   
 
@@ -48,16 +49,19 @@ public class Fighter : MonoBehaviour
             currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
         }
 
-        internal void swingSpecial(Statistics stats)
+        public void swingSpecial(Statistics stats)
         {
             currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
             currentlyEquippedWeapon.SpecialAttack();
         }
 
-        internal void swingSpecialTwo(Statistics stats)
+        public void swingSpecialTwo(Statistics stats)
         {
             currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
             currentlyEquippedWeapon.SpecialAttackTwo();
+        }
+        public Weapon GetCurrentWeapon(){
+            return currentlyEquippedWeapon;
         }
     }
  }

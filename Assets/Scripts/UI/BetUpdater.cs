@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ApolionGames.JamOne.Combat;
 using UnityEngine;
 using UnityEngine.UI;
-namespace ApolionGames.JamOne.Core{
+namespace ApolionGames.JamOne.UI{
     public class BetUpdater : MonoBehaviour
     {
         [SerializeField]
@@ -28,7 +28,7 @@ namespace ApolionGames.JamOne.Core{
         void Update()
         {
             if(sword!=null&&scoreText!=null){
-                scoreText.text=sword.betSize+"%";
+                scoreText.text=sword.betSize.ToString("0.00")+"%";
             }
         }
     }

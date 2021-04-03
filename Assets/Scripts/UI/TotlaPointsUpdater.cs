@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using ApolionGames.JamOne.Combat;
 using UnityEngine;
 using UnityEngine.UI;
-namespace ApolionGames.JamOne.Core{
-    public class ScoreUpdater : MonoBehaviour
+namespace ApolionGames.JamOne.UI{
+    public class TotlaPointsUpdater : MonoBehaviour
     {
         [SerializeField]
-        private string scoreTextName="scoreText";
+        private string scoreTextName="pointsToScoreText";
         [SerializeField]
         private Text scoreText;
-        private SlotMachinePointAggegator aggregator;
+        private GambelerSword sword;
 
         // Start is called before the first frame update
         void Start()
@@ -20,14 +21,14 @@ namespace ApolionGames.JamOne.Core{
                     scoreText = t; 
                 } 
             }
-            aggregator = GetComponentInChildren<SlotMachinePointAggegator>();
+            sword = GetComponentInParent<GambelerSword>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if(aggregator!=null&&scoreText!=null){
-                scoreText.text="You Score:"+aggregator.total;
+            if(sword!=null&&scoreText!=null){
+                scoreText.text="You needed:"+sword.pointsScore;
             }
         }
     }

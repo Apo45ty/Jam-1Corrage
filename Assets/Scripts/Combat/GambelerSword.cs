@@ -1,38 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using ApolionGames.JamOne.Core;
 using UnityEngine;
 namespace ApolionGames.JamOne.Combat{
 
     public class GambelerSword : Weapon
     {        
-        public float betSize;
-        private List<CombatTarget> targets = new List<CombatTarget>();
+        void Start(){
+            slotMachinePointAggegator = GetComponentInChildren<SlotMachinePointAggegator>();
+        }
         [SerializeField] private float AttackSquarSize = 3;
+        public float betSize;
         [SerializeField]
         private float betSizeIncrements=10;
+        private SlotMachinePointAggegator slotMachinePointAggegator;
+        public  float pointsScore;
 
-        public override void ApplyAttack(Transform transform, Statistics stats)
+        public override void ApplyAttack(Transform transform,List<CombatTarget> targets,CombatTarget WeaponUser)
         {
+            if(targets==null||targets.Count<=0)
+                return;
+            pointsScore = 0;
             foreach(CombatTarget target in targets){
-                Debug.Log(target.name);
+                if(target==WeaponUser)
+                    continue;
+                Statistics targetStats = target.GetComponent<Statistics>();
+                pointsScore+=targetStats.computePointsToAttack();
             }
-        }
-
-        public override void CaptureEnemies()
-        {
-            targets= new List<CombatTarget>();
-            Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, Vector2.one*AttackSquarSize,0);
-            foreach(Collider2D col in colliders){
-                CombatTarget combatTarget = col.gameObject.GetComponent<CombatTarget>();
-                if (combatTarget!=null)
-                {
-                    targets.Add(combatTarget);
+            bool isAttack = slotMachinePointAggegator.total>=pointsScore;
+            if(isAttack){
+                Debug.Log("Attacked");
+                foreach(CombatTarget target in targets){
+                    if(target==WeaponUser)
+                        continue;
+                    float damage = 10;
+                    target.GetComponent<Health>().doDamage(damage);
+                    target.AfterAttackCallback();
                 }
+            } else 
+            {
+                Debug.Log("Not Attacked");
+                Health health = WeaponUser.GetComponent<Health>();
+                float damage = health.currentHealth*betSize/100;
+                health.doDamage(damage);
             }
-        }
+        } 
 
-        public override void initialize()
+        public override float GetWeaponRange()
         {
+            return AttackSquarSize;
         }
 
         public override void SpecialAttack()
