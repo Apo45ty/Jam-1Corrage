@@ -22,9 +22,10 @@ public class Mover : MonoBehaviour
 
         public void move(Vector3 vector3)
         {
-            if(rb==null)
-            return;
-            rb.AddForce(vector3);
+            //if(rb==null)
+            //return;
+            //rb.AddForce(vector3);
+            transform.Translate(vector3);
         }
 
         internal void stop()
