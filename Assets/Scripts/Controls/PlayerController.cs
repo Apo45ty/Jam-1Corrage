@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
         private Fighter figther;
         private Mover mover;
         private Statistics stats;
-        public static KeyCode pSWINGKEYCODE,pSPECIALSWINGKEYCODE,pSPECIALSWINGKEYCODETWO;
+        public static KeyCode pSWINGKEYCODE,pSPECIALSWINGKEYCODE,pSPECIALSWINGKEYCODETWO,pINTERACTKEYCODE;
 
         [SerializeField]
         private KeyCode UPKEYCODE;
@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
         private KeyCode SPECIALSWINGKEYCODE;
         [SerializeField]
         private KeyCode SPECIALSWINGKEYCODETWO;
+        [SerializeField]
+        private KeyCode INTERACTKEYCODE;
         // Start is called before the first frame update
         void Start()
     {
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
         pSWINGKEYCODE = SWINGKEYCODE;
         pSPECIALSWINGKEYCODE=SPECIALSWINGKEYCODE;
         pSPECIALSWINGKEYCODETWO=SPECIALSWINGKEYCODETWO;
+        pINTERACTKEYCODE=INTERACTKEYCODE;
     }
         public List<CombatTarget> CaptureEnemies(float range)
         {

@@ -18,7 +18,7 @@ public class Fighter : MonoBehaviour
         {
             stats = GetComponent<Statistics>();
             UpdateWeaponInventory();
-            currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
+            
         }
         void Update(){
             currTimeSinceLastAttack=Mathf.Max(0,currTimeSinceLastAttack-Time.deltaTime);
@@ -31,6 +31,10 @@ public class Fighter : MonoBehaviour
                 if(w==null)
                     continue;
                 inventoryWeapons.Add(w);
+            }
+            if(inventoryWeapons.Count>0){
+                currentWeaponIndex=(currentWeaponIndex+1)%inventoryWeapons.Count;
+                currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
             }
         }
 

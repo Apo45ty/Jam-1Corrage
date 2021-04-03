@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
         internal void doDamage(float v)
         {
             this.currentHealth=Mathf.Max(0,this.currentHealth-v);
+
         }
     }
 }

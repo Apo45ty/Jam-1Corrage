@@ -12,7 +12,6 @@ namespace ApolionGames.JamOne.AI{
         private NavMeshAgent navMeshAgent;
         private float minChaseDistance=3;
         private Fighter fighter;
-        private float minAttackDistance=1;
 
         void Start(){
             navMeshAgent = GetComponent<NavMeshAgent>();
@@ -28,10 +27,9 @@ namespace ApolionGames.JamOne.AI{
 
             public override void tick(PlayerScript player)
             {
-                if(Vector2.Distance(player.transform.position,transform.position)<minAttackDistance)
+                if(fighter.GetCurrentWeapon()!=null&&fighter.GetCurrentWeapon().GetWeaponRange()>Vector2.Distance(player.transform.position,transform.position))
                 {
-                    if(fighter.GetCurrentWeapon()!=null)
-                         fighter.swing(CaptureEnemies(1),this.GetComponent<CombatTarget>());
+                    fighter.swing(CaptureEnemies(1),this.GetComponent<CombatTarget>());
                 } else if(Vector2.Distance(player.transform.position,transform.position)<minChaseDistance){
                     navMeshAgent.SetDestination(player.transform.position);
                 }
