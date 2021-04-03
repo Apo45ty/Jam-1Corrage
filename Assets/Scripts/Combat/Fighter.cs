@@ -34,34 +34,42 @@ public class Fighter : MonoBehaviour
             }
             if(inventoryWeapons.Count>0){
                 currentWeaponIndex=(currentWeaponIndex+1)%inventoryWeapons.Count;
-                currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
+                EquipCurrrentWeapon();
             }
         }
 
         public bool swing(List<CombatTarget> targets,CombatTarget WeaponUser)
         {
-            if(currTimeSinceLastAttack>0)
+            if (currTimeSinceLastAttack > 0)
                 return false;
             currTimeSinceLastAttack = stats.timeBetweenAttacks;
-            currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
-            currentlyEquippedWeapon.ApplyAttack(transform,targets,WeaponUser);
+            EquipCurrrentWeapon();
+            currentlyEquippedWeapon.ApplyAttack(transform, targets, WeaponUser);
             return true;
-        }   
+        }
+
+        private void EquipCurrrentWeapon()
+        {
+            if(currentlyEquippedWeapon!=null)
+                currentlyEquippedWeapon.TearDownUI();
+            currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
+            currentlyEquippedWeapon.SetUPUI();
+        }
 
         public void nextWeapon(){
             currentWeaponIndex=(currentWeaponIndex+1)%inventoryWeapons.Count;
-            currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
+            EquipCurrrentWeapon();
         }
 
         public void swingSpecial(Statistics stats)
         {
-            currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
+            EquipCurrrentWeapon();
             currentlyEquippedWeapon.SpecialAttack();
         }
 
         public void swingSpecialTwo(Statistics stats)
         {
-            currentlyEquippedWeapon = inventoryWeapons[currentWeaponIndex];
+            EquipCurrrentWeapon();
             currentlyEquippedWeapon.SpecialAttackTwo();
         }
         public Weapon GetCurrentWeapon(){

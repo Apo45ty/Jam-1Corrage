@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
         private Fighter figther;
         private Mover mover;
         private Statistics stats;
-        public static KeyCode pSWINGKEYCODE,pSPECIALSWINGKEYCODE,pSPECIALSWINGKEYCODETWO,pINTERACTKEYCODE;
+        public static KeyCode pSWINGKEYCODE,pSPECIALSWINGKEYCODE,
+        pSPECIALSWINGKEYCODETWO,pINTERACTKEYCODE,pUPKEYCODE,pDOWNKEYCODE,pLEFTKEYCODE
+        ,pRIGHTKEYCODE;
 
         [SerializeField]
         private KeyCode UPKEYCODE;
@@ -29,6 +31,8 @@ public class PlayerController : MonoBehaviour
         private KeyCode SPECIALSWINGKEYCODETWO;
         [SerializeField]
         private KeyCode INTERACTKEYCODE;
+        public static List<CombatTarget> targets = new List<CombatTarget>();
+
         // Start is called before the first frame update
         void Start()
     {
@@ -39,6 +43,10 @@ public class PlayerController : MonoBehaviour
         pSPECIALSWINGKEYCODE=SPECIALSWINGKEYCODE;
         pSPECIALSWINGKEYCODETWO=SPECIALSWINGKEYCODETWO;
         pINTERACTKEYCODE=INTERACTKEYCODE;
+        pUPKEYCODE=UPKEYCODE;
+        pDOWNKEYCODE=DOWNKEYCODE;
+        pLEFTKEYCODE=LEFTKEYCODE;
+        pRIGHTKEYCODE=RIGHTKEYCODE;
     }
         public List<CombatTarget> CaptureEnemies(float range)
         {
@@ -80,7 +88,8 @@ public class PlayerController : MonoBehaviour
                     figther.swingSpecialTwo(stats);
                 }
                 if(Input.GetKey(this.SWINGKEYCODE)){
-                    figther.swing(CaptureEnemies(figther.GetCurrentWeapon().GetWeaponRange()),this.GetComponent<CombatTarget>());
+                        targets = CaptureEnemies(figther.GetCurrentWeapon().GetWeaponRange());
+                        figther.swing(targets, this.GetComponent<CombatTarget>());
                 }
             }
         }

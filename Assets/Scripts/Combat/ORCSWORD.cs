@@ -22,6 +22,11 @@ namespace ApolionGames.JamOne.Combat{
             return 1;
         }
 
+        public override void SetUPUI()
+        {
+            return;
+        }
+
         public override void SpecialAttack()
         {
             throw new System.NotImplementedException();
@@ -30,6 +35,11 @@ namespace ApolionGames.JamOne.Combat{
         public override void SpecialAttackTwo()
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void TearDownUI()
+        {
+           return;
         }
     }
 }

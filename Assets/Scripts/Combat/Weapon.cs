@@ -10,5 +10,7 @@ namespace ApolionGames.JamOne.Combat{
         public abstract void SpecialAttack();
         public abstract void SpecialAttackTwo();
         public abstract float GetWeaponRange();
+        public abstract void SetUPUI();
+        public abstract void TearDownUI();
     }
 }

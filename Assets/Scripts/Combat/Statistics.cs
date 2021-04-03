@@ -14,6 +14,8 @@ public class Statistics : MonoBehaviour
         //Points needed to trigger an attack by gambelers sword
         public float PointsToAttack =  500;
 
+        public int Strength = 5;
+
         internal float computePointsToAttack()
         {
             return PointsToAttack;
