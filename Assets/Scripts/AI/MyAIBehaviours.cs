@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using ApolionGames.JamOne.Core;
 using UnityEngine;
 namespace ApolionGames.JamOne.AI{
-    public interface MyAIBehaviours
+    public class MyAIBehaviours : MonoBehaviour
     {
-        void tick(PlayerScript player);
-        AIStates myState();
+        public virtual void tick(PlayerScript player){}
+        public virtual AIStates myState(){return AIStates.thinking;}
     }
 }

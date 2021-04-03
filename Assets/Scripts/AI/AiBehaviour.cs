@@ -4,16 +4,16 @@ using ApolionGames.JamOne.Core;
 using UnityEngine;
 namespace ApolionGames.JamOne.AI{
 
-    public class AiBehaviour : MonoBehaviour, MyAIBehaviours
+    public class AiBehaviour :  MyAIBehaviours
     {
         AIStates state ;
 
-        public AIStates myState()
+        public override AIStates myState()
         {
             return state;
         }
 
-        public void tick(PlayerScript player)
+        public override void tick(PlayerScript player)
         {
             
         }

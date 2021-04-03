@@ -26,7 +26,7 @@ namespace ApolionGames.JamOne.AI{
         }
         void Update()
         {
-            elapseTime=Mathf.Min(0,elapseTime-Time.deltaTime);
+            elapseTime=Mathf.Max(0,elapseTime-Time.deltaTime);
             if(elapseTime>0)
                 return;
             AITick();
