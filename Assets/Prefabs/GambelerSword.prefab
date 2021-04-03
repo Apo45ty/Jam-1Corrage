@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackSquarSize: 1
-  betSize: 0
+  betSize: 50
   betSizeIncrements: 25
   pointsScore: 0
 --- !u!1 &602718816194676901
@@ -933,7 +933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -49.2, y: -243}
+  m_AnchoredPosition: {x: -37.944, y: -243}
   m_SizeDelta: {x: 282.3984, y: 123.9158}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &602718816342901901
@@ -966,7 +966,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 42
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
