@@ -11,7 +11,12 @@ namespace ApolionGames.JamOne.Combat{
             foreach(CombatTarget target in targets){
                 if(target==WeaponUser)
                     continue;
-                float damage = 10;
+                
+                
+                Statistics statistics = WeaponUser.GetComponent<Statistics>();
+                float damage = Mathf.Min((float)statistics.Strength*2,(float)int.MaxValue-1);
+            
+
                 target.GetComponent<Health>().doDamage(damage);
                 target.AfterAttackCallback();
             }

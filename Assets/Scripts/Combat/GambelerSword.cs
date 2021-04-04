@@ -18,9 +18,10 @@ namespace ApolionGames.JamOne.Combat{
         private bool isAttack;
         private float damage;
         void Start(){
-            slotMachinePointAggegator = GetComponentInChildren<SlotMachinePointAggegator>();
             weaponUI = GetComponentInChildren<WeaponUI>();
-            weaponUI.gameObject.SetActive(false);
+            weaponUI.transform.GetChild(0).gameObject.SetActive(true);
+            slotMachinePointAggegator = GetComponentInChildren<SlotMachinePointAggegator>();
+            weaponUI.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         public override void ApplyAttack(Transform transform,List<CombatTarget> targets,CombatTarget WeaponUser)
@@ -72,12 +73,12 @@ namespace ApolionGames.JamOne.Combat{
 
         public override void SetUPUI()
         {
-            weaponUI.gameObject.SetActive(true);
+           weaponUI.transform.GetChild(0).gameObject.SetActive(true);
         }
 
         public override void TearDownUI()
         {
-            weaponUI.gameObject.SetActive(false);
+            weaponUI.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

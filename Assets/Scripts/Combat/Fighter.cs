@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ApolionGames.JamOne.Core;
 using UnityEngine;
  namespace ApolionGames.JamOne.Combat{
 
@@ -10,6 +11,12 @@ public class Fighter : MonoBehaviour
         private List<Weapon> inventoryWeapons=new List<Weapon>();
         private Statistics stats;
         private int currentWeaponIndex = 0;
+
+        internal List<Weapon> getInventoryWeapons()
+        {
+            return inventoryWeapons;
+        }
+
         private Weapon currentlyEquippedWeapon;
         private float currTimeSinceLastAttack;
 
@@ -20,6 +27,17 @@ public class Fighter : MonoBehaviour
             UpdateWeaponInventory();
             
         }
+
+        public void ClearWeaponInventory()
+        {
+            foreach(Weapon w in inventoryWeapons){
+                Destroy(w.gameObject);
+            }
+            currentWeaponIndex=0;
+            currentlyEquippedWeapon=null;
+            inventoryWeapons=new List<Weapon>();
+        }
+
         void Update(){
             currTimeSinceLastAttack=Mathf.Max(0,currTimeSinceLastAttack-Time.deltaTime);
             
@@ -46,6 +64,12 @@ public class Fighter : MonoBehaviour
             EquipCurrrentWeapon();
             currentlyEquippedWeapon.ApplyAttack(transform, targets, WeaponUser);
             return true;
+        }
+
+        internal void LoadWeaponInventory(List<Weapon> inventory)
+        {
+            this.inventoryWeapons=inventory;
+            EquipCurrrentWeapon();
         }
 
         private void EquipCurrrentWeapon()
@@ -75,5 +99,10 @@ public class Fighter : MonoBehaviour
         public Weapon GetCurrentWeapon(){
             return currentlyEquippedWeapon;
         }
+
+        public float getAttackTimeOut(){
+            return currTimeSinceLastAttack / stats.timeBetweenAttacks;
+        }
+        
     }
  }

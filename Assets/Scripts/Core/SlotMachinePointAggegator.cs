@@ -20,7 +20,7 @@ namespace ApolionGames.JamOne.Core{
         // Update is called once per frame
         void Update()
         {
-            if(slotitems!=null&&slotitems.Length>0&& slotitems[0].getIsRunning()&&Input.GetKeyDown(PlayerController.pSWINGKEYCODE)){
+            if(slotitems!=null&&slotitems.Length>0&& slotitems[0].getIsRunning()&&Input.GetKey(PlayerController.pSWINGKEYCODE)){
                 this.total=0;
                 foreach(RandomSprite rSpr in slotitems){
                     this.total += rSpr.getCurrentSlotMachineItem().score;

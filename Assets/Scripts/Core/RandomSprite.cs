@@ -30,8 +30,10 @@ public class RandomSprite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(PlayerController.pSWINGKEYCODE))
-            isRunning = !isRunning;
+//        Debug.Log(isRunning);
+        isRunning=true;
+        if(Input.GetKey(PlayerController.pSWINGKEYCODE))
+            isRunning = false;
         if(!isRunning||possibleColors==null||possibleColors.Length==0)
             return;
         millisecondsSinceChange += Time.deltaTime;

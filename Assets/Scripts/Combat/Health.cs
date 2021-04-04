@@ -16,5 +16,15 @@ public class Health : MonoBehaviour
             this.currentHealth=Mathf.Max(0,this.currentHealth-v);
 
         }
+
+        internal bool IsDead()
+        {
+            return currentHealth==0;
+        }
+
+        internal void increaseHealth(int v)
+        {
+            this.currentHealth=Mathf.Min(maxHealth,this.currentHealth+v);
+        }
     }
 }

@@ -81,13 +81,13 @@ public class PlayerController : MonoBehaviour
                 } 
             } 
             if(figther!=null&&figther.GetCurrentWeapon()!=null){
-                if(Input.GetKey(this.SPECIALSWINGKEYCODE)){
+                if(Input.GetKeyDown(this.SPECIALSWINGKEYCODE)){
                     figther.swingSpecial(stats);
                 }
-                if(Input.GetKey(this.SPECIALSWINGKEYCODETWO)){
+                if(Input.GetKeyDown(this.SPECIALSWINGKEYCODETWO)){
                     figther.swingSpecialTwo(stats);
                 }
-                if(Input.GetKey(this.SWINGKEYCODE)){
+                if(Input.GetKeyDown(this.SWINGKEYCODE)){
                         targets = CaptureEnemies(figther.GetCurrentWeapon().GetWeaponRange());
                         figther.swing(targets, this.GetComponent<CombatTarget>());
                 }

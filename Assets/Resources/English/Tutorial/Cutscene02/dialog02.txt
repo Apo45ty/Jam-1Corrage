@@ -1,0 +1,5 @@
+Move with the A,W,S,D keys
+You can pick up weapons from the floor and have them be equipped to you instantenously.
+Press the "I" key to pick up the sword
+Pres "Space" To attack an incoming
+REMEMBER some weapons have special mechanics like the gambelers sword which requires that you gamble you health in order to damage the enemy so be carefullwithit
