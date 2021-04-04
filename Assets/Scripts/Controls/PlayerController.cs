@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
         private Fighter figther;
         private Mover mover;
         private Statistics stats;
+        public static KeyCode pSWINGKEYCODE,pSPECIALSWINGKEYCODE,
+        pSPECIALSWINGKEYCODETWO,pINTERACTKEYCODE,pUPKEYCODE,pDOWNKEYCODE,pLEFTKEYCODE
+        ,pRIGHTKEYCODE;
+
         [SerializeField]
         private KeyCode UPKEYCODE;
 
@@ -19,7 +23,15 @@ public class PlayerController : MonoBehaviour
         private KeyCode LEFTKEYCODE;
         [SerializeField]
         private KeyCode RIGHTKEYCODE;
+        [SerializeField]
         private KeyCode SWINGKEYCODE;
+        [SerializeField]
+        private KeyCode SPECIALSWINGKEYCODE;
+        [SerializeField]
+        private KeyCode SPECIALSWINGKEYCODETWO;
+        [SerializeField]
+        private KeyCode INTERACTKEYCODE;
+        public static List<CombatTarget> targets = new List<CombatTarget>();
 
         // Start is called before the first frame update
         void Start()
@@ -27,7 +39,28 @@ public class PlayerController : MonoBehaviour
         figther = GetComponent<Fighter>();
         mover = GetComponent<Mover>();
         stats = GetComponent<Statistics>();
+        pSWINGKEYCODE = SWINGKEYCODE;
+        pSPECIALSWINGKEYCODE=SPECIALSWINGKEYCODE;
+        pSPECIALSWINGKEYCODETWO=SPECIALSWINGKEYCODETWO;
+        pINTERACTKEYCODE=INTERACTKEYCODE;
+        pUPKEYCODE=UPKEYCODE;
+        pDOWNKEYCODE=DOWNKEYCODE;
+        pLEFTKEYCODE=LEFTKEYCODE;
+        pRIGHTKEYCODE=RIGHTKEYCODE;
     }
+        public List<CombatTarget> CaptureEnemies(float range)
+        {
+            List<CombatTarget> targets= new List<CombatTarget>();
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, Vector2.one*range,0);
+            foreach(Collider2D col in colliders){
+                CombatTarget combatTarget = col.gameObject.GetComponent<CombatTarget>();
+                if (combatTarget!=null)
+                {
+                    targets.Add(combatTarget);
+                }
+            }
+            return targets;
+        }
 
     // Update is called once per frame
     void Update()
@@ -35,35 +68,32 @@ public class PlayerController : MonoBehaviour
         if(stats!=null){
             if(mover!=null)  {
                 if(Input.GetKey(this.UPKEYCODE)){
-                    if(Input.GetKeyDown(this.UPKEYCODE))
-                        mover.stopVertical();
                     mover.move(new Vector3(0,stats.moveUPDist*Time.deltaTime,0));
                 }  else 
                 if(Input.GetKey(this.DOWNKEYCODE)){
-                    if(Input.GetKeyDown(this.DOWNKEYCODE))
-                        mover.stopVertical();
                     mover.move(new Vector3(0,-stats.moveDownDist*Time.deltaTime,0));
-                } else 
+                } 
                 if(Input.GetKey(this.LEFTKEYCODE)){
-                    if(Input.GetKeyDown(this.LEFTKEYCODE))
-                        mover.stopHorizontal();
                     mover.move(new Vector3(-stats.moveLeftDist*Time.deltaTime,0,0));
                 } else 
                 if(Input.GetKey(this.RIGHTKEYCODE)){
-                    if(Input.GetKeyDown(this.RIGHTKEYCODE))
-                        mover.stopHorizontal();
                     mover.move(new Vector3(stats.moveRightDist*Time.deltaTime,0,0));
-                } else 
-                {
-                    mover.stop();
-                }
+                } 
             } 
-            if(figther!=null){
-                if(Input.GetKey(this.SWINGKEYCODE)){
-                    figther.swing(stats);
+            if(figther!=null&&figther.GetCurrentWeapon()!=null){
+                if(Input.GetKeyDown(this.SPECIALSWINGKEYCODE)){
+                    figther.swingSpecial(stats);
+                }
+                if(Input.GetKeyDown(this.SPECIALSWINGKEYCODETWO)){
+                    figther.swingSpecialTwo(stats);
+                }
+                if(Input.GetKeyDown(this.SWINGKEYCODE)){
+                        targets = CaptureEnemies(figther.GetCurrentWeapon().GetWeaponRange());
+                        figther.swing(targets, this.GetComponent<CombatTarget>());
                 }
             }
         }
+        
     }
 }
 

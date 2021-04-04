@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,17 +10,15 @@ public class Statistics : MonoBehaviour
         public float moveDownDist=5;
         public float moveLeftDist=5;
         public float moveRightDist=5;
+        public float timeBetweenAttacks=3;
+        //Points needed to trigger an attack by gambelers sword
+        public float PointsToAttack =  500;
 
-        // Start is called before the first frame update
-        void Start()
-    {
-        
-    }
+        public int Strength = 5;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        internal float computePointsToAttack()
+        {
+            return PointsToAttack;
+        }
     }
-}
 }

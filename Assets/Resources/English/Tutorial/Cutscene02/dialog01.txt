@@ -1,0 +1,1 @@
+The bar on your left is your health bar. The White border around it will let you know when you can attack again: when it is white you can attack again.

@@ -1,0 +1,2 @@
+Enemy:Stop right there
+Player:Who is talking?
